@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 1200px">
+    <div class="py-5 text-center">
+        <h2>그룹 목록</h2>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>그룹번호</th>
+                <th>제목</th>
+                <th>좋아요수</th>
+                <th>작성일</th>
+                <th>작성자</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tr>
+            <tr th:each="groupInfo : ${groupInfo}">
+                <td th:text="${groupInfo.groupNo}">그룹번호</td>
+                <td><a th:href="" th:text="${groupInfo.title}">제목</a></td>
+                <td th:text="${groupInfo.likecount}">좋아요수</td>
+                <td th:text="${groupInfo.createDate}">작성일</td>
+                <td><a th:href="" th:text="${groupInfo.memberId}">작성자</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
