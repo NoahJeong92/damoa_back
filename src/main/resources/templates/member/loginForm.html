@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="max-width: 600px">
+        <div class="py-5 text-center">
+            <h2>로그인</h2>
+        </div>
+        <hr class="my-4">
+        <form method="post" action="/member/login">
+            <table>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="text" name="email"/></td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="password" name="pwd"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">로그인</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
