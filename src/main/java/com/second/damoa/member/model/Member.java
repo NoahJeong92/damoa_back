@@ -8,10 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "Member")
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class Member {
 
     @Id
@@ -25,4 +24,14 @@ public class Member {
 
     private String role;
 
+    public Member() {
+    }
+
+    public Member(String memberId, String pwd, String name, String email, String role) {
+        this.memberId = memberId;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
 }

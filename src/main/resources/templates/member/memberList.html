@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
+    <title>회원 목록</title>
 </head>
 <body>
     <div class="container" style="max-width: 600px">
@@ -23,13 +24,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                </tr>
                 <tr th:each="membersList : ${membersList}">
-                    <td th:text="${membersList.memberId}">${memberList.memberId}</td>
-                    <td th:text="${membersList.pwd}">${memberList.pwd}</td>
-                    <td th:text="${membersList.name}">${memberList.name}</td>
-                    <td th:text="${membersList.email}">${memberList.email}</td>
-                    <td th:text="${membersList.role}">${memberList.role}</td>
+                    <td th:text="${membersList.memberId}"></td>
+                    <td th:text="${membersList.pwd}"></td>
+                    <td th:text="${membersList.name}"></td>
+                    <td th:text="${membersList.email}"></td>
+                    <td th:text="${membersList.role}"></td>
+                </tr>
+                <tr th:colspan="5">
+                    <td><a th:href="@{/main.com}">메인화면</a></td>
                 </tr>
                 </tbody>
             </table>

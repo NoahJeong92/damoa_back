@@ -18,11 +18,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Member> list() throws Exception {
-        List<Member> membersList = memberRepository.findAll(Sort.by(Sort.Direction.DESC,"member_id"));
-        for(Member member : membersList) {
-            System.out.println("member.getMemberId()= " + member.getMemberId());
-            System.out.println("member.getPwd()= " + member.getPwd());
-        }
+        List<Member> membersList = memberRepository.findAll(Sort.by(Sort.Direction.DESC,"memberId"));
         return membersList;
     }
 }
