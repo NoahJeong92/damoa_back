@@ -1,5 +1,6 @@
 package com.second.damoa.group.model;
 
+import com.second.damoa.member.model.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,12 +10,14 @@ import java.sql.Date;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
-@Table(name = "groupinfo")
+@RequiredArgsConstructor // @NonNull 생성자
+@Table(name = "groupinfo") // db 테이블명
 public class GroupInfo {
 
     @Id
-    private Integer groupNo;
+    @Column(name = "group_no") // db 컬럼명
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NonNull
     private String title;
@@ -40,14 +43,13 @@ public class GroupInfo {
     @NonNull
     private int count;
 
-    @NonNull
     private String memberId;
 
     public GroupInfo() {
     }
 
-    public GroupInfo(Integer groupNo, @NonNull String title, @NonNull String content, String groupImg, @NonNull int likecount, @NonNull String type, String local, @NonNull Date createDate, @NonNull int count, @NonNull String memberId) {
-        this.groupNo = groupNo;
+    public GroupInfo(Long id, @NonNull String title, @NonNull String content, String groupImg, @NonNull int likecount, @NonNull String type, String local, @NonNull Date createDate, @NonNull int count, String memberId) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.groupImg = groupImg;

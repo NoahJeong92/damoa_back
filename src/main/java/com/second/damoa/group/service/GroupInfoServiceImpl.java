@@ -18,7 +18,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
 
     @Override
     public List<GroupInfo> list() throws Exception {
-        List<GroupInfo> groupInfoList = groupInfoRepository.findAll(Sort.by(Sort.Direction.DESC,"groupNo"));
+        List<GroupInfo> groupInfoList = groupInfoRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
         return groupInfoList;
     }
+
+/*    @Override
+    public List<GroupInfo> addlist(GroupInfo groupInfo) throws Exception {
+        return groupInfoRepository.saveAll(groupInfo);
+    }*/
 }

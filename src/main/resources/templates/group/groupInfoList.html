@@ -26,7 +26,7 @@
             </thead>
             <tbody>
             <tr th:each="groupInfo : ${groupInfo}">
-                <td th:text="${groupInfo.groupNo}">그룹번호</td>
+                <td th:text="${groupInfo.id}">그룹번호</td>
                 <td th:text="${groupInfo.title}"></td>
                 <td th:text="${groupInfo.likecount}">좋아요수</td>
                 <td th:text="${groupInfo.memberId}">작성자</td>
