@@ -30,15 +30,17 @@ public class GroupInfoController {
     public String groupList(Model model) throws Exception {
         List<GroupInfo> groupInfo = groupInfoService.list();
         model.addAttribute("groupInfo", groupInfo);
-        return "group/groupInfoRead";
+        return "group/groupInfoList";
     }
 
-/*    // 그룹 생성 로직 수행
+    // 그룹 생성 로직 수행
     @PostMapping("/add")
-    public String grouAdd(@ModelAttribute("groupInfo") GroupInfo groupInfo) throws Exception {
-        groupInfoService.addlist(groupInfo);
-        return "group/groupInfoList";
-    }*/
+    public ModelAndView saveGroup(@ModelAttribute("groupInfo") GroupInfo groupInfo) throws Exception {
+        Long groupId = groupInfoService.saveGroup(groupInfo);
+        System.out.println("groupId= " + groupId);
+        ModelAndView mav = new ModelAndView("redirect:/main.com");
+        return mav;
+    }
 
     // 그룹 수정
     @PostMapping("/update")

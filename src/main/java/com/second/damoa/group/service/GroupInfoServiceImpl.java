@@ -22,8 +22,9 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return groupInfoList;
     }
 
-/*    @Override
-    public List<GroupInfo> addlist(GroupInfo groupInfo) throws Exception {
-        return groupInfoRepository.saveAll(groupInfo);
-    }*/
+    @Override
+    public Long saveGroup(GroupInfo groupInfo) throws Exception {
+        GroupInfo result = groupInfoRepository.save(groupInfo);
+        return result.getId();
+    }
 }

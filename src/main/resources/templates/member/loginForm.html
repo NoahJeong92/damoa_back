@@ -14,17 +14,16 @@
         <form method="post" action="/member/login">
             <table>
                 <tr>
-                    <td>이메일</td>
-                    <td><input type="text" name="email"/></td>
+                    <td>아이디</td>
+                    <td><input type="text" name="memberId"/></td>
                 </tr>
                 <tr>
                     <td>비밀번호</td>
                     <td><input type="password" name="pwd"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <button type="submit">로그인</button>
-                    </td>
+                    <td><a th:href="@{/main.com}">메인화면</a></td>
+                    <td><button type="submit">로그인</button></td>
                 </tr>
             </table>
         </form>

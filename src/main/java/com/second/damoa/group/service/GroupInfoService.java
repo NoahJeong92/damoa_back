@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface GroupInfoService {
     public List<GroupInfo> list() throws Exception;
-/*    public List<GroupInfo> addlist(GroupInfo groupInfo) throws Exception;*/
+    public Long saveGroup(GroupInfo groupInfo) throws Exception;
 }

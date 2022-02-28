@@ -1,6 +1,7 @@
 package com.second.damoa.viewpage.controller;
 
 import com.second.damoa.group.model.GroupInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +24,19 @@ public class ViewController {
         return mav;
     }
 
+    // 로그인 페이지 뷰
+    @RequestMapping("/loginForm")
+    public ModelAndView loginPage() {
+        String viewName = "member/loginForm";
+        ModelAndView mav = new ModelAndView(viewName);
+        return mav;
+    }
+
     // 그룹 생성 페이지 이동
-    @GetMapping("/groupinfo/groupInfoWrite")
-    public String groupAdd() {
-        return "group/groupInfoWrite";
+    @RequestMapping("/groupInfoWrite")
+    public ModelAndView groupAdd() throws Exception {
+        String viewName = "group/groupInfoWrite";
+        ModelAndView mav = new ModelAndView(viewName);
+        return mav;
     }
 }

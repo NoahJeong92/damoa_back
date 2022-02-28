@@ -7,6 +7,63 @@
     <title>그룹 정보 작성</title>
 </head>
 <body>
-
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>그룹 만들기</h2>
+        </div>
+        <hr class="my-4">
+        <div>
+            <form method="post" action="/groupinfo/add">
+            <table class="table">
+                <tr>
+                    <td>작성자</td>
+                    <td><input type="text" name="memberId" id="memberId" /></td>
+                </tr>
+                <tr>
+                    <td>제목</td>
+                    <td><input type="text" name="title" id="title" /></td>
+                </tr>
+                <tr>
+                    <td>그룹 사진</td>
+                    <td>이미지 사진 출력</td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td><input type="textarea" name="content" id="content" /></td>
+                </tr>
+                <tr>
+                    <td>세부정보</td>
+                </tr>
+                <tr>
+                    <td>모임 방식</td>
+                    <td>
+                        <input type="radio" name="type" id="type_all" value="온라인">모두</input>
+                        <input type="radio" name="type" id="type_online" value="온라인">온라인</input>
+                        <input type="radio" name="type" id="type_offline" value="오프라인">오프라인</input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>모임 지역</td>
+                    <td>
+                        <select name="local">
+                            <option value="">지역선택</option>
+                            <option value="서울">서울</option>
+                            <option value="인천">인천</option>
+                            <option value="대전">대전</option>
+                            <option value="대구">대구</option>
+                            <option value="부산">부산</option>
+                            <option value="울산">울산</option>
+                            <option value="광주">광주</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a th:href="@{/main.com}">메인화면</a></td>
+                    <td><input type="submit" value="그룹 만들기" /></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

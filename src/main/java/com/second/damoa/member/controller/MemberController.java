@@ -39,14 +39,6 @@ public class MemberController {
         return "redirect:/main.com";
     }
 
-    // 로그인 페이지 뷰
-    @RequestMapping("/loginForm")
-    public ModelAndView loginPage() {
-        String viewName = "member/loginForm";
-        ModelAndView mav = new ModelAndView(viewName);
-        return mav;
-    }
-
     /**
      * 테스트용 데이터 추가
      */

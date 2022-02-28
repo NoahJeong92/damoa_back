@@ -2,10 +2,12 @@ package com.second.damoa.group.model;
 
 import com.second.damoa.member.model.Member;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.sql.Blob;
-import java.sql.Date;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -29,7 +31,7 @@ public class GroupInfo {
     @Lob
     private String groupImg;
 
-    @NonNull
+    @ColumnDefault("0")
     private int likecount;
 
     @NonNull
@@ -37,27 +39,18 @@ public class GroupInfo {
 
     private String local;
 
-    @NonNull
+//    @Basic(optional = false)
+    @Column(insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
-    @NonNull
+    @ColumnDefault("0")
     private int count;
 
+    @NonNull
     private String memberId;
 
     public GroupInfo() {
     }
 
-    public GroupInfo(Long id, @NonNull String title, @NonNull String content, String groupImg, @NonNull int likecount, @NonNull String type, String local, @NonNull Date createDate, @NonNull int count, String memberId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.groupImg = groupImg;
-        this.likecount = likecount;
-        this.type = type;
-        this.local = local;
-        this.createDate = createDate;
-        this.count = count;
-        this.memberId = memberId;
-    }
 }
