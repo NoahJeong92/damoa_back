@@ -1,12 +1,11 @@
 package com.second.damoa.group.model;
 
-import com.second.damoa.member.model.Member;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
