@@ -17,6 +17,7 @@
             <thead>
             <tr>
                 <th>그룹번호</th>
+                <th></th>
                 <th>제목</th>
                 <th>좋아요수</th>
                 <th>작성자</th>
@@ -26,8 +27,9 @@
             </thead>
             <tbody>
             <tr th:each="groupInfo : ${groupInfo}">
-                <td th:text="${groupInfo.id}">그룹번호</td>
-                <td th:text="${groupInfo.title}"></td>
+                <td><a th:href="@{'/groupinfo/read/' + ${groupInfo.id}}"><p th:text="${groupInfo.id}">그룹번호</p></a></td>
+                <td><a th:href="@{'/groupinfo/read/' + ${groupInfo.id}}"><img th:src="|/groupinfo/image/${groupInfo.groupImg}|" width="50" height="50"></a></td>
+                <td><a th:href="@{'/groupinfo/read/' + ${groupInfo.id}}"><p th:text="${groupInfo.title}">제목</p></a></td>
                 <td th:text="${groupInfo.likecount}">좋아요수</td>
                 <td th:text="${groupInfo.memberId}">작성자</td>
                 <td th:text="${groupInfo.count}">조회수</td>

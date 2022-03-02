@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,5 +27,12 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     public Long saveGroup(GroupInfo groupInfo) throws Exception {
         GroupInfo result = groupInfoRepository.save(groupInfo);
         return result.getId();
+    }
+
+    @Override
+    public GroupInfo readGroup(Long id) throws Exception {
+        Optional<GroupInfo> groupWrapper = groupInfoRepository.findById(id);
+        GroupInfo groupInfo = groupWrapper.get();
+        return groupInfo;
     }
 }

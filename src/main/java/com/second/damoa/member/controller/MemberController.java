@@ -10,7 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Slf4j
@@ -32,11 +37,24 @@ public class MemberController {
 
     // 로그인 수행 로직
     @PostMapping("/login")
-    public String loginById(@ModelAttribute Member member) {
-        String email = member.getEmail();
-        String pwd = member.getPwd();
-        log.info("email={}, pwd={}", email, pwd);
-        return "redirect:/main.com";
+    public ModelAndView loginById(@ModelAttribute Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        Member memberInfo = memberService.login(member);
+        if (member != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("memberInfo", memberInfo);
+            session.setAttribute("isLogOn", true);
+            mav.setViewName("redirect:/main.com");
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>"
+                    + "alert('입력한 정보가 올바르지 않습니다.');"
+                    + "location.href='/member/login';"
+                    + "</script>");
+            out.flush();
+        }
+        return mav;
     }
 
     /**

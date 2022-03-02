@@ -1,7 +1,6 @@
 package com.second.damoa.group.service;
 
-import com.second.damoa.group.model.GroupInfo;
-import com.second.damoa.group.model.UploadFile;
+import com.second.damoa.group.model.UploadImg;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +20,7 @@ public class GroupImgStore {
     }
 
     // 업로드 이미지 저장
-    public UploadFile storeImg(MultipartFile multipartFile) throws IOException {
+    public String storeImg(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
@@ -29,7 +28,9 @@ public class GroupImgStore {
         String originalImgName = multipartFile.getOriginalFilename();
         String storeImgName = createStoreImgName(originalImgName);
         multipartFile.transferTo(new File(getFullPath(storeImgName)));
-        return new UploadFile(originalImgName, storeImgName);
+        UploadImg uploadImg = new UploadImg(originalImgName, storeImgName);
+        String groupImg = uploadImg.getStoreImgName();
+        return groupImg;
     }
 
     // 업로드 이미지 이름 랜덤 생성

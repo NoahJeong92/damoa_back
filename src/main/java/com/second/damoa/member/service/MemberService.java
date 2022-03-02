@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MemberService {
     List<Member> list() throws Exception;
+    Member login(Member member) throws Exception;
 }
