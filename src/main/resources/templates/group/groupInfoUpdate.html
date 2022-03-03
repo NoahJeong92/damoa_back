@@ -13,23 +13,31 @@
     </div>
     <hr class="my-4">
     <div>
-        <form method="post" action="/groupinfo/update/{id}" enctype="multipart/form-data">
+        <form method="post" action="/groupinfo/update" enctype="multipart/form-data">
             <table class="table">
                 <tr>
+                    <td>게시판 번호</td>
+                    <td>
+                        <input type="text" name="id" id="id" th:field="${groupInfo.id}" readonly>
+                    </td>
+                </tr>
+                <tr>
                     <td>작성자</td>
-                    <td><input type="text" name="memberId" id="memberId"/></td>
+                    <td>
+                        <input type="text" name="memberId" id="memberId" th:field="${groupInfo.memberId}" readonly>
+                    </td>
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td><textarea type="text" name="title" id="title" style="width: 600px; height: 50px;"></textarea></td>
+                    <td><textarea type="text" th:text="${groupInfo.title}" name="title" id="title" style="width: 600px; height: 50px;"></textarea></td>
                 </tr>
                 <tr>
                     <td>그룹 사진</td>
-                    <td><input type="file" name="groupImg" id="groupImg"></td>
+                    <td><input type="file" name="uploadImg" id="uploadImg"></td>
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td><textarea name="content" id="content" style="width: 600px; height: 800px;"></textarea></td>
+                    <td><textarea th:text="${groupInfo.content}" name="content" id="content" style="width: 600px; height: 800px;"></textarea></td>
                 </tr>
                 <tr>
                     <td>모임 방식</td>

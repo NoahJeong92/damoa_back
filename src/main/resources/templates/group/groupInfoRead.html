@@ -14,7 +14,6 @@
     </div>
     <hr class="my-4">
     <div>
-        <form method="post" action="/groupinfo/update">
             <table class="table">
                 <tr>
                     <td>작성자</td>
@@ -42,11 +41,11 @@
                 </tr>
                 <tr>
                     <td><a th:href="@{/main.com}">메인화면</a></td>
-                    <td><button>수정하기</button></td>
+                    <td><a th:href="@{'/groupinfo/updateform/' + ${groupInfo.id}}">수정하기</a></td>
+                    <td><a th:href="@{'/groupinfo/delete/' + ${groupInfo.id}}">삭제하기</a></td>
                     <td><button>가입하기</button></td>
                 </tr>
             </table>
-        </form>
     </div>
 </div>
 </body>

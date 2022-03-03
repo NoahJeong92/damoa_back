@@ -33,12 +33,4 @@ public class ViewController {
         ModelAndView mav = new ModelAndView(viewName);
         return mav;
     }
-
-    // 그룹 생성 페이지 이동
-    @RequestMapping("/groupInfoWrite")
-    public ModelAndView groupAdd() throws Exception {
-        String viewName = "group/groupInfoWrite";
-        ModelAndView mav = new ModelAndView(viewName);
-        return mav;
-    }
 }

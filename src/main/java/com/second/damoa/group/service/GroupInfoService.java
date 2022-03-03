@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface GroupInfoService {
     public List<GroupInfo> list() throws Exception; // 그룹 목록 조회
     public Long saveGroup(GroupInfo groupInfo) throws Exception; // 그룹 생성
-    public GroupInfo readGroup(Long id) throws Exception; // 그룹 정보 조회
+    public GroupInfo readGroup(Long id) throws Exception; // 그룹 상세 정보 조회
+    public Long updateGroup(GroupInfo groupInfo) throws Exception; // 그룹 정보 수정
+    public Long deleteGroup(GroupInfo groupInfo) throws Exception; // 그룹 삭제
 
 }
