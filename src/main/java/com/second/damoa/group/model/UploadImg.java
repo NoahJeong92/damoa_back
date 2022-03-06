@@ -12,4 +12,5 @@ public class UploadImg {
         this.uploadImgName = uploadImgName;
         this.storeImgName = storeImgName;
     }
+
 }

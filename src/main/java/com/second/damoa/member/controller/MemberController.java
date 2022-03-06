@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -55,6 +58,21 @@ public class MemberController {
             out.flush();
         }
         return mav;
+    }
+
+    @PostMapping("/signup.do")
+    public String memberSign(Member member, Model model) throws Exception {
+        log.info("memberId={}", member.getMemberId());
+        log.info("pwd={}", member.getPwd());
+        log.info("name={}", member.getName());
+        log.info("age={}", member.getAge());
+
+        model.addAttribute(member.getMemberId());
+        model.addAttribute(member.getPwd());
+        model.addAttribute(member.getName());
+        model.addAttribute(member.getAge());
+
+        return "redirect:/";
     }
 
     /**

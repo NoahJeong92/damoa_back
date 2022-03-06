@@ -22,18 +22,15 @@ public class Member {
 
     private String name;
 
-    private String email;
-
-    private String role;
+    private String age;
 
     public Member() {
     }
 
-    public Member(String memberId, String pwd, String name, String email, String role) {
+    public Member(String memberId, String pwd, String name, String age) {
         this.memberId = memberId;
         this.pwd = pwd;
         this.name = name;
-        this.email = email;
-        this.role = role;
+        this.age = age;
     }
 }
