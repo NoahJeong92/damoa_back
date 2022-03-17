@@ -1,13 +1,17 @@
 package com.second.damoa.group.service;
 
+import com.second.damoa.group.dto.JoinUserDTO;
 import com.second.damoa.group.model.GroupInfo;
 import com.second.damoa.group.repository.GroupInfoRepository;
+import com.second.damoa.group.repository.JoinUserInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
 import java.security.acl.Group;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +25,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     // 그룹 목록 조회
     @Override
     public List<GroupInfo> list() throws Exception {
-        List<GroupInfo> groupInfoList = groupInfoRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+        List<GroupInfo> groupInfoList = groupInfoRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
         return groupInfoList;
     }
 
@@ -36,8 +40,7 @@ public class GroupInfoServiceImpl implements GroupInfoService {
     @Override
     public GroupInfo readGroup(Long id) throws Exception {
         Optional<GroupInfo> groupWrapper = groupInfoRepository.findById(id);
-        GroupInfo groupInfo = groupWrapper.get();
-        return groupInfo;
+        return groupWrapper.get();
     }
 
     // 그룹 상세 정보 수정
@@ -47,9 +50,37 @@ public class GroupInfoServiceImpl implements GroupInfoService {
         return newGroupInfo.getId();
     }
 
+    // 그룹 삭제
     @Override
     public Long deleteGroup(GroupInfo groupInfo) throws Exception {
         groupInfoRepository.delete(groupInfo);
         return null;
+    }
+
+    // 그룹 검색
+    @Override
+    public List<GroupInfo> searchTitle(String search) throws Exception {
+        List<GroupInfo> groupInfoList = groupInfoRepository.findByTitleContaining(search);
+        return groupInfoList;
+    }
+
+    // 조회수 카운트
+    @Override
+    public int updateCount(Long id) {
+        return groupInfoRepository.updateCount(id);
+    }
+
+    // 그룹에 가입한 유저 조회
+    @Override
+    public List<JoinUserInterface> joinList(Long id) throws Exception {
+        List<JoinUserInterface> res = groupInfoRepository.joinUser(id);
+        return res;
+
+    }
+
+    // 사용자 그룹 가입
+    @Override
+    public int joinGroup(Long id, String name) throws Exception {
+        return groupInfoRepository.joinGroup(id, name);
     }
 }

@@ -2,11 +2,13 @@ package com.second.damoa.group.model;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.web.multipart.MultipartFile;
+import com.second.damoa.social.model.User;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,24 +32,27 @@ public class GroupInfo {
     @Lob
     private String groupImg;
 
-    @ColumnDefault("0")
+    @Column(columnDefinition = "integer default 0", nullable = false)
     private int likecount;
 
     @NonNull
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private GroupType type;
 
     private String local;
 
-//    @Basic(optional = false)
     @Column(insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
-    @ColumnDefault("0")
+    @Column(columnDefinition = "integer default 0", nullable = false)
     private int count;
 
-    @NonNull
     private String memberId;
+
+//    //가입한 사람 목록
+//    @OneToMany(mappedBy = "groupInfo")
+//    List<User> User = new ArrayList<>();
 
     public GroupInfo() {
     }
