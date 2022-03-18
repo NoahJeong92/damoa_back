@@ -1,14 +1,10 @@
 package com.second.damoa.group.model;
 
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import com.second.damoa.social.model.User;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -36,8 +32,7 @@ public class GroupInfo {
     private int likecount;
 
     @NonNull
-    @Enumerated(EnumType.STRING)
-    private GroupType type;
+    private String type;
 
     private String local;
 

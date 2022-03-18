@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+/*
+ * 그룹 대표 이미지 파일 이름 랜덤 변경 후 저장
+ */
 @Component
 public class GroupImgStore {
 

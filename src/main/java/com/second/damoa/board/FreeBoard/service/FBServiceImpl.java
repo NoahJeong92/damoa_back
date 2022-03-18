@@ -25,7 +25,7 @@ public class FBServiceImpl implements FBService{
 
     @Override
     public List<FreeBoard> list() throws Exception {
-        List<FreeBoard> boardInfoList = fbRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+        List<FreeBoard> boardInfoList = fbRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
         return boardInfoList;
     }
 

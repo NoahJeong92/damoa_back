@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.second.damoa.group.dto.GroupInfoDTO;
 import com.second.damoa.group.dto.JoinUserDTO;
 import com.second.damoa.group.model.GroupInfo;
+import com.second.damoa.group.model.UserJoinGroup;
 import com.second.damoa.group.repository.GroupInfoRepository;
 import com.second.damoa.group.repository.JoinUserInterface;
 import com.second.damoa.group.service.GroupImgStore;
@@ -67,42 +68,13 @@ public class GroupInfoController {
         return groupInfo;
     }
 
-    // 그룹 대표 이미지 경로
-    @GetMapping("/image/{filename}")
-    public Resource groupImg(@PathVariable String filename) throws MalformedURLException {
-        return new UrlResource("file:" + groupImgStore.getFullPath(filename));
-    }
-
-    // 그룹 정보 수정
-    @PostMapping("/update")
-    public String updateGroup(@ModelAttribute GroupInfo groupInfo,
-                              @RequestParam("uploadImg") MultipartFile uploadImg) throws Exception {
-        String groupImg = groupImgStore.storeImg(uploadImg);
-        groupInfo.setGroupImg(groupImg);
-
-        groupInfoService.updateGroup(groupInfo);
-        return "redirect:http://localhost:3000/";
-    }
-
-    // 그룹 삭제
-    @GetMapping("/delete/{id}")
-    public void groupDelete(@PathVariable Long id, @RequestParam GroupInfo groupInfo) throws Exception {
-        groupInfoService.deleteGroup(groupInfo);
-
-    }
-
-    // 그룹 title 검색
-    @GetMapping("/search")
-    public List<GroupInfo> search(@RequestParam String search) throws Exception {
-        List<GroupInfo> searchGroup = groupInfoService.searchTitle(search);
-        return searchGroup;
-    }
-
     // 그룹 가입
     @PostMapping("/join/{id}")
     public void joinGroup(@PathVariable Long id,
-                          @RequestParam(required = false) String name) throws Exception {
-        groupInfoService.joinGroup(id, name);
+                          @RequestParam(required = false) String name,
+                          HttpServletResponse response) throws Exception {
+        groupInfoService.joinGroup(id, name); // 성공시 int '1' 반환
+        response.sendRedirect("http://localhost:3000/GroupInfCheck/" + id);
     }
 
     // 그룹에 가입한 회원 조회
@@ -111,4 +83,47 @@ public class GroupInfoController {
         List<JoinUserInterface> joinUser = groupInfoService.joinList(id);
         return joinUser;
     }
+
+    // 그룹 대표 이미지 경로
+    @GetMapping("/image/{filename}")
+    public Resource groupImg(@PathVariable String filename) throws MalformedURLException {
+        return new UrlResource("file:" + groupImgStore.getFullPath(filename));
+    }
+
+    // 그룹 대표 이미지 변경
+    @PostMapping("/imgupdate")
+    public void groupImgUpdate(@RequestParam("id") Long id,
+                                 @RequestParam("uploadImg") MultipartFile uploadImg,
+                                 HttpServletResponse response) throws Exception {
+        String groupImg = groupImgStore.storeImg(uploadImg);
+
+        groupInfoService.imgUpdate(id, groupImg);
+        response.sendRedirect("http://localhost:3000/GroupInfCheck/" + id);
+    }
+
+//    // 그룹 title 검색
+//    @GetMapping("/search")
+//    public List<GroupInfo> search(@RequestParam String search) throws Exception {
+//        List<GroupInfo> searchGroup = groupInfoService.searchTitle(search);
+//        return searchGroup;
+//    }
+//
+//    // 그룹 정보 수정
+//    @PostMapping("/update")
+//    public String updateGroup(@ModelAttribute GroupInfo groupInfo,
+//                              @RequestParam("uploadImg") MultipartFile uploadImg) throws Exception {
+//        String groupImg = groupImgStore.storeImg(uploadImg);
+//        groupInfo.setGroupImg(groupImg);
+//
+//        groupInfoService.updateGroup(groupInfo);
+//        return "redirect:http://localhost:3000/";
+//    }
+//
+//    // 그룹 삭제
+//    @GetMapping("/delete/{id}")
+//    public void groupDelete(@PathVariable Long id, @RequestParam GroupInfo groupInfo) throws Exception {
+//        groupInfoService.deleteGroup(groupInfo);
+//
+//    }
+
 }

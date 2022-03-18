@@ -26,7 +26,7 @@ public class PBServiceImpl implements PBService {
 
     @Override
     public List<PromotionBoard> list() throws Exception {
-        List<PromotionBoard> boardInfoList = pbRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+        List<PromotionBoard> boardInfoList = pbRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
         return boardInfoList;
     }
 
