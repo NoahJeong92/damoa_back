@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Getter
@@ -45,9 +45,8 @@ public class GroupInfo {
 
     private String memberId;
 
-//    //가입한 사람 목록
-//    @OneToMany(mappedBy = "groupInfo")
-//    List<User> User = new ArrayList<>();
+//    @OneToMany(mappedBy = "groupinfo")
+//    private List<UserJoinGroup> userJoinGroups = new ArrayList<UserJoinGroup>();
 
     public GroupInfo() {
     }

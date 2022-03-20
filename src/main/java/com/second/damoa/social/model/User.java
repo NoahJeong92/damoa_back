@@ -1,11 +1,12 @@
 package com.second.damoa.social.model;
 
-import com.second.damoa.group.model.GroupInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Getter
@@ -27,15 +28,15 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @ManyToOne
-    @JoinColumn(name= "group_no")
-    private GroupInfo groupInfo;
-
-    public void setGroupInfo(GroupInfo groupInfo) {
-        this.groupInfo = groupInfo;
-    }
-
-
-
+//    @ManyToOne
+//    @JoinColumn(name= "group_no")
+//    private GroupInfo groupInfo;
+//
+//    public void setGroupInfo(GroupInfo groupInfo) {
+//        this.groupInfo = groupInfo;
+//    }
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<UserJoinGroup> userJoinGroups = new ArrayList<UserJoinGroup>();
 
 }

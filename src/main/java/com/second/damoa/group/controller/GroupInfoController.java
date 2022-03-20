@@ -1,11 +1,10 @@
 package com.second.damoa.group.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.second.damoa.group.dto.GroupInfoDTO;
-import com.second.damoa.group.dto.JoinUserDTO;
 import com.second.damoa.group.model.GroupInfo;
-import com.second.damoa.group.model.UserJoinGroup;
-import com.second.damoa.group.repository.GroupInfoRepository;
+
+import com.second.damoa.group.model.UserGroupInfo;
+import com.second.damoa.group.repository.GroupListInterface;
 import com.second.damoa.group.repository.JoinUserInterface;
 import com.second.damoa.group.service.GroupImgStore;
 import com.second.damoa.group.service.GroupInfoService;
@@ -14,18 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.MalformedURLException;
-import java.security.acl.Group;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -44,36 +39,54 @@ public class GroupInfoController {
 
     // 그룹 목록 조회 페이지 이동
     @GetMapping("/list")
-    public List<GroupInfo> groupList() throws Exception {
-        List<GroupInfo> groupInfo = groupInfoService.list();
+    public List<GroupListInterface> groupList() throws Exception {
+        List<GroupListInterface> groupInfo = groupInfoService.list();
         return groupInfo;
     }
 
     // 입력한 그룹 정보 저장
     @PostMapping("/add")
-    public void saveGroup(@ModelAttribute GroupInfo groupInfo, @RequestParam("uploadImg") MultipartFile uploadImg,
-                      HttpServletResponse response) throws Exception {
+    public void saveGroup(@ModelAttribute GroupInfo groupInfo,
+                          @RequestParam("userid") Long userid,
+                          @RequestParam("uploadImg") MultipartFile uploadImg,
+                          HttpServletResponse response) throws Exception {
         String groupImg = groupImgStore.storeImg(uploadImg); // 업로드 이미지 파일 이름 랜덤 변경
         groupInfo.setGroupImg(groupImg);
 
         groupInfoService.saveGroup(groupInfo);
+
+//        // 그룹 생성자 UserGroupInfo db에 저장
+//        Long groupid = groupInfo.getId();
+//        groupInfoService.joinGroup(groupid, userid);
         response.sendRedirect("http://localhost:3000/");
     }
 
     // 그룹 정보 조회
     @GetMapping("/read/{id}")
-    public GroupInfo groupRead(@PathVariable Long id) throws Exception {
+    public GroupInfoDTO groupRead(@PathVariable Long id) throws Exception {
         GroupInfo groupInfo = groupInfoService.readGroup(id);
-        // groupInfoService.updateCount(id); // 조회수 업데이트
-        return groupInfo;
+        GroupInfoDTO groupInfoDTO = new GroupInfoDTO(groupInfo);
+        return groupInfoDTO;
     }
 
     // 그룹 가입
     @PostMapping("/join/{id}")
     public void joinGroup(@PathVariable Long id,
-                          @RequestParam(required = false) String name,
+                          @RequestParam("userid") Long userid,
                           HttpServletResponse response) throws Exception {
-        groupInfoService.joinGroup(id, name); // 성공시 int '1' 반환
+        groupInfoService.joinGroup(id, userid); // 성공시 int '1' 반환
+        response.sendRedirect("http://localhost:3000/GroupInfCheck/" + id);
+    }
+
+    // 그룹 탈퇴
+    @PostMapping("/leave/{id}")
+    public void leaveGroup(@PathVariable Long id,
+                           @RequestParam("userid") Long userid,
+                           HttpServletResponse response) throws Exception {
+        int res = groupInfoService.leaveGroup(id, userid);
+        log.info("group_id = {}", id);
+        log.info("user_id = {}", userid);
+        log.info("res = {}", res);
         response.sendRedirect("http://localhost:3000/GroupInfCheck/" + id);
     }
 
